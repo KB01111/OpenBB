@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  openbb:
+    build:
+      context: .
+      dockerfile: build/docker/platform.dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      OPENBB_API_AUTH: ${OPENBB_API_AUTH:-false}
+      OPENBB_API_USERNAME: ${OPENBB_API_USERNAME:-}
+      OPENBB_API_PASSWORD: ${OPENBB_API_PASSWORD:-}
+      OPENBB_API_AUTH_EXTENSION: ${OPENBB_API_AUTH_EXTENSION:-}
+      OPENBB_AUTO_BUILD: ${OPENBB_AUTO_BUILD:-true}
+      OPENBB_DEBUG_MODE: ${OPENBB_DEBUG_MODE:-false}
+      OPENBB_DEV_MODE: ${OPENBB_DEV_MODE:-false}
+      OPENBB_HUB_BACKEND: ${OPENBB_HUB_BACKEND:-https://payments.openbb.co}
+      OPENBB_API_HOST: ${OPENBB_API_HOST:-0.0.0.0}
+      OPENBB_API_PORT: ${OPENBB_API_PORT:-8000}
+    volumes:
+      - openbb-data:/root/.openbb_platform
+volumes:
+  openbb-data:
